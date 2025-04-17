@@ -18,7 +18,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class Activity
 {
-	private String activityId;
+	private String id;
+	private String userId;
 	private String userName;
 	private ActivityType activityType;
 	private Integer duration;

@@ -1,0 +1,14 @@
+{
+  "id": "1",
+  "userid": "sandeep123",
+  "activityType": "RUNNING",
+  "duration": 45,
+  "caloriesBurned": 300,
+  "startTime": "2025-04-17T07:30:00",
+  "additionalMetrics":
+   {
+    "distance": "5.2km",
+    "heartRate": 120,
+    "averageSpedd": 10.4
+  }
+}
