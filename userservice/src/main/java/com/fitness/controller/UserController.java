@@ -46,9 +46,7 @@ public class UserController
     @GetMapping("/{userId}/validate")
     public ResponseEntity<Boolean> validateUser(@PathVariable String userId)
     {
-//		boolean isValid = userService.validateUser(userId);
-//		return ResponseEntity.ok(isValid);
-    	
+		// Call the user service to validate the user	
     	return ResponseEntity.ok(userService.validateUser(userId));
 	}
 

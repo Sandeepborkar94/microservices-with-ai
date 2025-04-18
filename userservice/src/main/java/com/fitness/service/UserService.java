@@ -1,6 +1,5 @@
 package com.fitness.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -12,7 +11,10 @@ import com.fitness.dto.UserResponse;
 import com.fitness.model.User;
 import com.fitness.repository.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class UserService
 {
 	// This class will contain the business logic for user registration and authentication
@@ -139,8 +141,8 @@ public class UserService
 
 
 	public Boolean validateUser(String userId) 
-	{
-		
+	{	
+		log.info("Validating user with ID: {}", userId);
 		return userRepository.existsById(userId);
 	}
 }
