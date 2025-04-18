@@ -2,6 +2,7 @@ package com.fitness.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,9 +37,20 @@ public class UserController
 
     // Get user by ID
     @GetMapping("/{id}")
-    public UserResponse getUserById(@PathVariable String id) {
+    public UserResponse getUserById(@PathVariable String id)
+    {
         return userService.getUserById(id);
     }
+    
+    
+    @GetMapping("/{userId}/validate")
+    public ResponseEntity<Boolean> validateUser(@PathVariable String userId)
+    {
+//		boolean isValid = userService.validateUser(userId);
+//		return ResponseEntity.ok(isValid);
+    	
+    	return ResponseEntity.ok(userService.validateUser(userId));
+	}
 
     // Delete user by ID
     @DeleteMapping("/{id}")

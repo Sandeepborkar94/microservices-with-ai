@@ -135,4 +135,12 @@ public class UserService
 		
 		
 	}
+
+
+
+	public Boolean validateUser(String userId) 
+	{
+		
+		return userRepository.existsById(userId);
+	}
 }
