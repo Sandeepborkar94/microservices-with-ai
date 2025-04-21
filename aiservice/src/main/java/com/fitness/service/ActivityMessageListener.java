@@ -14,15 +14,16 @@ import lombok.extern.slf4j.Slf4j;
 public class ActivityMessageListener
 {
 	
-	
 	@RabbitListener(queues = "activity.queue")
 	public void processActivity(Activity activity)
 	{
 		log.info("Received activity message: {}", activity);
 		
-		// Process the activity message
-		// For example, save it to the database or perform some business logic
-		// activityService.saveActivity(activity);
+		/* 
+		 	Process the activity message
+		 	For example, save it to the database or perform some business logic
+			activityService.saveActivity(activity);
+		*/
 		
 		log.info("Processed activity message: {}", activity);
 		log.info("Activity ID: {}", activity.getId());
