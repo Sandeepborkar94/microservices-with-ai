@@ -4,7 +4,10 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
 import com.fitness.model.Activity;
+import com.fitness.model.Recommendation;
+import com.fitness.repository.RecommendationRepository;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,11 +16,16 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ActivityMessageListener
 {
+	private final ActivityAiService activityAiService;
+	
+	private final RecommendationRepository recommendationRepository;
+	
 	
 	@RabbitListener(queues = "activity.queue")
 	public void processActivity(Activity activity)
 	{
 		log.info("Received activity message: {}", activity);
+//		log.info("generated recommendation: {}", activityAiService.generateRecommendation(activity));	
 		
 		/* 
 		 	Process the activity message
@@ -25,17 +33,14 @@ public class ActivityMessageListener
 			activityService.saveActivity(activity);
 		*/
 		
-		log.info("Processed activity message: {}", activity);
-		log.info("Activity ID: {}", activity.getId());
-		log.info("User ID: {}", activity.getUserId());
-		log.info("Activity Type: {}", activity.getActivityType());
-		log.info("Duration: {} minutes", activity.getDuration());
-		log.info("Calories Burned: {}", activity.getCaloriesBurned());
-		log.info("Start Time: {}", activity.getStartTime());
-		log.info("Additional Metrics: {}", activity.getAdditionalMetrics());
+		Recommendation recommendation = activityAiService.generateRecommendation(activity);
 		
-		log.info("Activity processing completed.");
+		recommendationRepository.save(recommendation);
+		
 		
 	}
 
+	
+	
+	
 }
