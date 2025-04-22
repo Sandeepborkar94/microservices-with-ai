@@ -1,4 +1,4 @@
-package com.fitness.service;
+ package com.fitness.service;
 
 import java.util.List;
 
