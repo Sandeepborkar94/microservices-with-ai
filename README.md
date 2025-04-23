@@ -118,3 +118,94 @@
   - `8082` for Activity Controller
 - Replace placeholders in URLs and request bodies with actual values.
 - For `POST` and `PUT` methods, ensure JSON matches the structure expected by DTOs (`RegisterRequest`, `ActivityRequest`).
+
+
+=----==---------------------====----------------------------------------------------------------------------------------------
+
+
+# Microservices API Gateway - Endpoint Documentation
+
+This document provides details on the exposed endpoints for the microservices routed via the API Gateway (port 8765).
+
+---
+
+## 🎯 Activity Service - `/api/v1/activities`
+
+### ➕ Track Activity [POST]
+- **URL**: `http://localhost:8765/api/v1/activities`
+- **Headers**: `Content-Type: application/json`
+- **Body**:
+```json
+{
+  "userId": "user123",
+  "activityType": "Running",
+  "duration": 30,
+  "distance": 5.0,
+  "caloriesBurned": 250
+}
+```
+
+### 📥 Get User Activities [GET]
+- **URL**: `http://localhost:8765/api/v1/activities`
+- **Headers**: `X-User-ID: user123`
+
+### 🔍 Get Specific Activity [GET]
+- **URL**: `http://localhost:8765/api/v1/activities/{activityId}`
+
+### 📃 Get All Activities [GET]
+- **URL**: `http://localhost:8765/api/v1/activities/all`
+
+---
+
+## 🧠 Recommendation Service - `/api/v1/recommendations`
+
+### 📋 Get Recommendations for User [GET]
+- **URL**: `http://localhost:8765/api/v1/recommendations/user123`
+
+### 📊 Get Activity Recommendation [GET]
+- **URL**: `http://localhost:8765/api/v1/recommendations/activity/{activityId}`
+
+---
+
+## 👤 User Service - `/api/users`
+
+### ➕ Register User [POST]
+- **URL**: `http://localhost:8765/api/users`
+- **Body**:
+```json
+{
+  "firstName": "Sandeep",
+  "lastName": "Borkar",
+  "email": "sandeep@example.com",
+  "password": "securePassword123"
+}
+```
+
+### 🔍 Get User by ID [GET]
+- **URL**: `http://localhost:8765/api/users/{id}`
+
+### ✅ Validate User [GET]
+- **URL**: `http://localhost:8765/api/users/{userId}/validate`
+
+### ❌ Delete User [DELETE]
+- **URL**: `http://localhost:8765/api/users/{id}`
+
+### ♻️ Update User [PUT]
+- **URL**: `http://localhost:8765/api/users/{id}`
+- **Body**:
+```json
+{
+  "firstName": "Sandeep",
+  "lastName": "Borkar",
+  "email": "updated@example.com",
+  "password": "newSecurePassword456"
+}
+```
+
+### 🔎 Get User by Email [GET]
+- **URL**: `http://localhost:8765/api/users/email?email=sandeep@example.com`
+
+### 📚 Get All Users [GET]
+- **URL**: `http://localhost:8765/api/users`
+
+---
