@@ -1,15 +1,16 @@
 #spring.application.name=configserver
 
+server:
+  port: 8888
+
 spring:
   application:
     name: config-server
-    profiles:
-      active: native
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/config
-               
-server:
-  port: 8888
+        git:
+          uri: https://github.com/Sandeepborkar94/microservices-with-ai.git
+          default-label: master  # or whatever branch you’re using
+          search-paths:
+            - .
