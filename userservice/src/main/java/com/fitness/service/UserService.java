@@ -36,7 +36,21 @@ public class UserService
 		// Check if the user already exists
 		if (userRepository.existsByEmail(registerRequest.getEmail()))
 		{
-			throw new RuntimeException("User already exists");
+			User existingUser = userRepository.findByEmail(registerRequest.getEmail());
+			
+			UserResponse userResponse = new UserResponse();
+			
+			userResponse.setId(existingUser.getId());
+			userResponse.setKeycloakId(existingUser.getKeycloakId());
+			userResponse.setPassword(existingUser.getPassword());
+			userResponse.setEmail(existingUser.getEmail());
+			userResponse.setFirstName(existingUser.getFirstName());
+			userResponse.setLastName(existingUser.getLastName());
+			userResponse.setCreatedAt(existingUser.getCreatedAt());
+			userResponse.setUpdatedAt(existingUser.getUpdatedAt());
+			
+			return userResponse;
+
 		}
 		
 		// Create a new User entity
@@ -53,6 +67,7 @@ public class UserService
 		UserResponse userResponse = new UserResponse();
 		
 		userResponse.setId(savedUser.getId());
+		userResponse.setKeycloakId(savedUser.getKeycloakId());
 		userResponse.setPassword(savedUser.getPassword());
 		userResponse.setEmail(savedUser.getEmail());
 		userResponse.setFirstName(savedUser.getFirstName());
@@ -113,7 +128,7 @@ public class UserService
 	
 	public UserResponse getUserByEmail(String email)
 	{
-		User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+		User user = userRepository.findByEmail(email);
 		
 		UserResponse userResponse = new UserResponse();
 		
@@ -143,6 +158,6 @@ public class UserService
 	public Boolean validateUser(String userId) 
 	{	
 		log.info("Validating user with ID: {}", userId);
-		return userRepository.existsById(userId);
+		return userRepository.existsByKeycloakId(userId);
 	}
 }
