@@ -133,7 +133,7 @@ public class UserService
 		UserResponse userResponse = new UserResponse();
 		
 		userResponse.setId(user.getId());
-		userResponse.setPassword(user.getPassword());
+		userResponse.setPassword(user.getPassword()); 
 		userResponse.setEmail(user.getEmail());
 		userResponse.setFirstName(user.getFirstName());
 		userResponse.setLastName(user.getLastName());
@@ -152,9 +152,7 @@ public class UserService
 		
 		
 	}
-
-
-
+	
 	public Boolean validateUser(String userId) 
 	{	
 		log.info("Validating user with ID: {}", userId);
